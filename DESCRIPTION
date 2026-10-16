@@ -1,0 +1,19 @@
+Package: shinyeda
+Title: Mazda MFF Explorer
+Version: 1.0.0
+Description: Shiny application for exploratory analysis of MMM time series data.
+License: MIT
+Encoding: UTF-8
+Imports:
+    shiny,
+    dplyr,
+    tidyr,
+    purrr,
+    readr,
+    ggplot2,
+    lubridate,
+    DT,
+    openxlsx,
+    plotly,
+    readxl,
+    scales

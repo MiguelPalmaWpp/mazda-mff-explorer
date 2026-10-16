@@ -1,0 +1,13 @@
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+Rplots.pdf
+rsconnect/
+*.csv
+*.xlsx
+*.xls
+*.RData
+*.zip
+*.log
+*.tmp

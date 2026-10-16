@@ -1,0 +1,20 @@
+library(shiny)
+library(dplyr)
+library(tidyr)
+library(purrr)
+library(readr)
+library(ggplot2)
+library(lubridate)
+library(DT)
+library(openxlsx)
+
+options(shiny.maxRequestSize = 300 * 1024^2)
+
+source("R/data_processing.R")
+source("R/plots.R")
+source("R/stats_engine.R")
+source("R/excel_export.R")
+source("R/ui.R")
+source("R/server.R")
+
+shinyApp(ui = app_ui, server = app_server)
