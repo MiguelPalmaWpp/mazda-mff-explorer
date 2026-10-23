@@ -20,6 +20,8 @@ La app acepta MFF de Mazda en `.csv`, `.xlsx`, `.xls` y `.RData`, con una column
 
 El gráfico interactivo muestra los valores originales de una columna a la vez. Permite alternar línea/barras, hacer zoom, enfocar el rango habitual, restaurar la vista completa y descargar un PNG desde la barra de Plotly. El botón `Download data (.csv)` descarga los datos de la serie. Se conservan el resumen estadístico, el ZIP de gráficos y el libro Excel maestro.
 
+En la hoja `Summary Table` del Excel, `Total Spend` muestra una sola vez por variable `Spend` la suma de todos sus valores disponibles. Las demás variables dejan esa celda en blanco.
+
 La interfaz guía al usuario por la carga, la selección de variable y el análisis. Muestra el rango de fechas, el número de filas, variables y valores disponibles, y explica cómo leer el gráfico y las estadísticas. La identidad visual usa `www/styles.css` y los colores azules de Mazda Dashboard.
 
 ## Publicar en Posit Connect Cloud

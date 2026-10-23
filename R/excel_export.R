@@ -78,14 +78,16 @@ write_master_workbook <- function(df, df_flighting, df_summary, file) {
   header_style <- openxlsx::createStyle(textDecoration = "bold", fgFill = "#D9EAF7", border = "Bottom")
   merged_center_style <- openxlsx::createStyle(halign = "center", valign = "center", wrapText = TRUE)
   low_datapoints_style <- openxlsx::createStyle(fontColour = "#C0392B", fgFill = "#FADBD8", textDecoration = "bold")
+  spend_number_style <- openxlsx::createStyle(numFmt = "#,##0.00")
   
   openxlsx::addStyle(wb, "Flighting", header_style, rows = 1, cols = seq_along(df_flighting), gridExpand = TRUE)
   openxlsx::addStyle(wb, "Summary Table", header_style, rows = 1, cols = seq_along(df_summary), gridExpand = TRUE)
   
   datapoints_col <- match("Total Datapoints", names(df_summary))
+  spend_col <- match("Total Spend", names(df_summary))
   plot_col <- match("Plot", names(df_summary))
   notes_col <- match("Notes", names(df_summary))
-  merge_cols <- stats::na.omit(c(datapoints_col, plot_col, notes_col))
+  merge_cols <- stats::na.omit(c(datapoints_col, spend_col, plot_col, notes_col))
   variable_blocks <- split(seq_len(nrow(df_summary)), df_summary$VariableName)
   
   if(length(merge_cols) > 0) {
@@ -98,6 +100,12 @@ write_master_workbook <- function(df, df_flighting, df_summary, file) {
       }
       openxlsx::addStyle(wb, "Summary Table", merged_center_style, rows = excel_rows, cols = merge_cols, gridExpand = TRUE, stack = TRUE)
     }
+  }
+
+  if(!is.na(spend_col)) {
+    openxlsx::addStyle(wb, "Summary Table", spend_number_style,
+                       rows = seq_len(nrow(df_summary)) + 1, cols = spend_col,
+                       gridExpand = TRUE, stack = TRUE)
   }
   
   if(!is.na(datapoints_col)) {

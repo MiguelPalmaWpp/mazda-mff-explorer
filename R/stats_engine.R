@@ -125,8 +125,21 @@ build_flighting_table <- function(df, cols_num) {
 }
 
 build_summary_table <- function(df, cols_num) {
-  cols_num %>%
+  summary <- cols_num %>%
     purrr::set_names() %>%
     purrr::map_dfr(~ summarise_variable(df, .x, include_global_details = TRUE)) %>%
     dplyr::select("VariableName", dplyr::everything())
+
+  summary$`Total Spend` <- NA_real_
+  spend_columns <- cols_num[grepl("spend", cols_num, ignore.case = TRUE)]
+  for(column in spend_columns) {
+    values <- df[[column]]
+    available <- values[is.finite(values)]
+    if(length(available) > 0) {
+      first_row <- match(column, summary$VariableName)
+      summary$`Total Spend`[first_row] <- sum(available)
+    }
+  }
+
+  dplyr::relocate(summary, `Total Spend`, .after = `Total Datapoints`)
 }
